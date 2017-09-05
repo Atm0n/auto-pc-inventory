@@ -1,25 +1,19 @@
-# intent d'algo, 24-8-2017 extrere dades sobre el sistema i posteriorment enviar-les a un servidor que farà d'inventari ?? by: atm0n
+#!/usr/bin/env python3
+import MAC
+import platform
+import psutil
 
-import platform, psutil, subprocess, os, re
-# SUBPROCESS CACA NO FER SERVIRsi
-#windows#########################################3
-
-
-#linux###############################################
 # returns the version and the name of the dist
 linux_version = platform.dist()
-print("version: " + linux_version[0] + " " + linux_version[1])
 # the date of the last installed update
-linux_last_update ="last update: " + platform.version()
-print(linux_last_update)
+linux_last_update = "last update: " + platform.version()
+
 # returns the processor achitecture
-processor = "cpu architecture: " + platform.processor()
-print(processor)
-cpu_info = subprocess.check_output("cat /proc/cpuinfo |grep 'model name' ", shell=True).strip()
+architecture = platform.processor()
 
+mac_addrs = MAC.get_mac()  # it stores into a list all the mac addrs
+disk = psutil.disk_usage("/")
+ram = psutil.virtual_memory()  # all ram info
+ram = str(int(ram[0] / 1000000)) + "MB"  # only what I need :D the total amount
+print(ram)  # to test
 
-print ("prova")
-print(cpu_info)
-
-
-############################### psutil
