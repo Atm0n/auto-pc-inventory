@@ -4,11 +4,14 @@ infos:
 	-last update      	DONE
 	-distro				DONE
 	-ram				DONE
-	-cpu				
-	-pcname
-	-mac address		DONE
+	-cpu				DONE
+		-arquitectura	DONE
+		-model			DONE
+	-pcname				i would think about doing it or not
+	-network			DONE
+		-MAC			DONE
+		-IP				DONE
 	- ...
 How?¿?
-	-using a google calc file always online!
-	-then a web interface that let you import a list with all the mac's etc ¿?¿?
-
+	-using a google calc file always online!		# the best way i think
+	-then a web interface that let you import a list with all the mac's etc ¿?¿? 	# have to think about it
