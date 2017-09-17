@@ -1,32 +1,16 @@
-#!/usr/bin/env python3
-
-# network
-
-import psutil
-net_inf = dict()
-networkinfo = psutil.net_if_addrs()
-del networkinfo["lo"]  # this deletes the local host info
-nics = networkinfo.keys()
-print(nics)  # what gets the network interface names!
-for nics in nics:
-    print(nics)
-    ip = ""
-    mac = ""
-    net = networkinfo[nics]
-
-    ip = list(net[0])
-    print(str(ip[1]) + "help")
-    if ip[1] == (mac =:
-        # if network isn't connected there's no ip
-        ip = " "
-        
-        mac = net[1]
-        mac = mac[2]
-        print("hola")
-    else:
-        ip = ip[1]
-        mac = net[2]
-        mac = mac[1]
-
-    net_inf[nics] = ip, mac
-    print(net_inf)
+def network_inf():
+    import psutil
+    data_total = {}  # where all the data is stored
+    for iface_name, iface in psutil.net_if_addrs().items():
+        data = {}  # to avoid residual data
+        if iface_name == "lo":
+            pass  # if the interface is "lo" (localhost) it's ignored
+        else:
+            for addr in iface:
+                if addr.family == 2:  # IPv4
+                    data['ipv4'] = addr.address
+                    data_total[iface_name] = data  # to store the ipv4
+                elif addr.family == 17:  # MAC
+                    data['mac'] = addr.address
+                    data_total[iface_name] = data  # to store the mac
+    return data_total
