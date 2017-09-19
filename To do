@@ -15,5 +15,7 @@ data base or something:
 	- google spreadsheets "client"									IN PROGRESS
 		it works!, well I need a little more of work on it and,
 		I have to start entering data and decide how to store it
+		- credentials, sheet selector, etc...							DONE(easy library)
+		- updater info										TO DO
 
 	- dhcp auto configurer?¿¿?										TO START
