@@ -7,7 +7,9 @@ infos:
 	-cpu				DONE
 		-arquitectura		DONE
 		-model			DONE
-	-pcname				NOPE
+	-pcname				DONE (not exactly what i wanted so the next one is what i really wanted)
+	- brand and model of the pc
+	  if it's one(like DELL X600)   IN PROGRESS	(if i can't find a way to get this info, i would just leave it)
 	-network			DONE
 		-MAC			DONE
 		-IP			DONE
