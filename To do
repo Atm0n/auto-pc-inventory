@@ -1,16 +1,16 @@
 things that i need to know to make it useful or the most worth i can.
 
 infos:
-	-last update      	DONE
+	-last update      		DONE
 	-distro				DONE
 	-ram				DONE
 	-cpu				DONE
-		-arquitectura	DONE
+		-arquitectura		DONE
 		-model			DONE
 	-pcname				NOPE
 	-network			DONE
 		-MAC			DONE
-		-IP				DONE
+		-IP			DONE
 data base or something:
 	- google spreadsheets "client"									IN PROGRESS
 		it works!, well I need a little more of work on it and,
