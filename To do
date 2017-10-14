@@ -1,7 +1,7 @@
 things that i need to know to make it useful or the most worth i can.
 
-infos:
-	-last update      		DONE
+infos:	
+	-last seen     			DONE
 	-distro				DONE
 	-ram				DONE
 	-cpu				DONE
@@ -9,15 +9,11 @@ infos:
 		-model			DONE
 	-pcname				DONE (not exactly what i wanted so the next one is what i really wanted)
 	- brand and model of the pc
-	  if it's one(like DELL X600)   IN PROGRESS	(if i can't find a way to get this info, i would just leave it)
+	  if it's one(like DELL X600)   IMPOSSIBLE FOR NOW	(if i can't find a way to get this info, i would just leave it)
 	-network			DONE
 		-MAC			DONE
 		-IP			DONE
 data base or something:
-	- google spreadsheets "client"									IN PROGRESS
-		it works!, well I need a little more of work on it and,
-		I have to start entering data and decide how to store it
-		- credentials, sheet selector, etc...							DONE(easy library)
-		- updater info										TO DO
+	-mysql server and database										DONE
 
 	- dhcp auto configurer?¿¿?										TO START
