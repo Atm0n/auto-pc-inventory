@@ -1,5 +1,4 @@
 # auto-pc-inventory
-inventory of the hardware and software of a pc, using a google spreadsheet as data base.
-I've tried to use an existing platform but htat was too dificult and gave me a lot of troubles so, i decided to do it in my way.
-It needs that you configure a google api spreadsheet and then yoau have it all done. So, enjoy.
-Nothing more to add.
+A usefull utility to make the work of somebody htat have to make an inventory of a big number of computers, using a docker container of a mysql server (using a google spreadsheet as data base at the branch:https://github.com/Atm0n/auto-pc-inventory/tree/automatic-computer-inventory(google-spreadshet)).
+I've tried to use an existing platform but that was too dificult and gave me a lot of problems so, i decided to do it in my way.
+Nothing more to add. I will update this as soon i do a big change i geuss.
