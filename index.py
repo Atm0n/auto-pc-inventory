@@ -16,14 +16,12 @@ architecture = platform.processor()
 # it stores into a dic all the network data
 network = network.network_inf()
 net_keys = list(network.keys())
-mac = list()
 for i in range(0, len(net_keys)):
     key = net_keys[i]
-    if key[0:3] == "wlp" or "wlan":
+    if key[0:2] == "wl":
         network_wlan = network[key]
         network_wlan = network_wlan["mac"]
-        mac.append(network_wlan)
-    elif key[0:3] == "enp" or "eth":
+    elif key[0:1] == "e":
         network_eth = network[key]
         network_eth = network_eth["mac"]
     else:
