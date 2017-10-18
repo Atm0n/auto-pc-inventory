@@ -3,18 +3,14 @@ import network, client  # imports from the root of the project folder
 import platform, psutil, cpuinfo, datetime  # needed libraies
 # returns the version and the name of the dist
 data = list()
-date = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S') # adpted to the date database format
+date = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
 linux_version = platform.dist()
-linux_version = linux_version[1]
-# the date of the last installed update
-linux_last_update = platform.version()
+linux_version = linux_version[0]+" "+linux_version[1]
 # returns the cpu brand
 cpu = cpuinfo.get_cpu_info()
 cpu = cpu["brand"]
 # PC NAME
 pc_name = platform.node()
-# pc brand
-# LSWH
 # returns the processor achitecture
 architecture = platform.processor()
 # it stores into a dic all the network data
@@ -23,7 +19,7 @@ net_keys = list(network.keys())
 mac = list()
 for i in range(0, len(net_keys)):
     key = net_keys[i]
-    if key[0:3] == "wlp":
+    if key[0:3] == "wlp" or "wlan":
         network_wlan = network[key]
         network_wlan = network_wlan["mac"]
         mac.append(network_wlan)
