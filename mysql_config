@@ -31,4 +31,7 @@ ALTER TABLE `inventory`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
   
   
-# client user TO SPECIFY if you need help tell me 
+# client user
+CREATE USER 'clients'@'%' IDENTIFIED BY 'password'; # change the password pls
+# user permissions
+GRANT SELECT, INSERT, UPDATE, DELETE ON inventory.inventory TO 'clients'@'%';
