@@ -5,7 +5,7 @@ import platform, psutil, cpuinfo, datetime, pymysql  # needed libraies
 def update(data):
     
 
-    conn = pymysql.connect(host='192.168.56.101', user='clients', passwd='inventory', db='inventory')
+    conn = pymysql.connect(host='192.168.56.101', user='user', passwd='passwd', db='db')
     cur = conn.cursor()
     sql = "DELETE FROM `inventory` WHERE `mac_wlan` = %s"
     cur.execute(sql, (data[6]))
