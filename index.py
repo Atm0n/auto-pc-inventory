@@ -1,6 +1,37 @@
 #!/usr/bin/env python3
-import network, client  # imports from the root of the project folder
-import platform, psutil, cpuinfo, datetime  # needed libraies
+# imports from the root of the project folder
+import platform, psutil, cpuinfo, datetime, pymysql  # needed libraies
+
+def update(data):
+    
+
+    conn = pymysql.connect(host='192.168.56.101', user='clients', passwd='inventory', db='inventory')
+    cur = conn.cursor()
+    sql = "DELETE FROM `inventory` WHERE `mac_wlan` = %s"
+    cur.execute(sql, (data[6]))
+    conn.commit()
+    sql = "DELETE FROM `inventory` WHERE `mac_eth` = %s"
+    cur.execute(sql, (data[7]))
+    conn.commit()
+    sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,arch,RAM, mac_wlan, mac_eth) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"
+    cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]))
+    conn.commit()
+    conn.close()
+def network_inf():
+    data_total = {}  # where all the data is stored
+    for iface_name, iface in psutil.net_if_addrs().items():
+        data = {}  # to avoid residual data
+        if iface_name == "lo":
+            pass  # if the interface is "lo" (localhost) it's ignored
+        else:
+            for addr in iface:
+                if addr.family == 2:  # IPv4
+                    data['ipv4'] = addr.address
+                    data_total[iface_name] = data  # to store the ipv4
+                elif addr.family == 17:  # MAC
+                    data['mac'] = addr.address
+                    data_total[iface_name] = data  # to store the mac
+    return data_total
 # returns the version and the name of the dist
 data = list()
 date = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
@@ -14,8 +45,9 @@ pc_name = platform.node()
 # returns the processor achitecture
 architecture = platform.processor()
 # it stores into a dic all the network data
-network = network.network_inf()
+network = network_inf()
 net_keys = list(network.keys())
+
 for i in range(0, len(net_keys)):
     key = net_keys[i]
     if key[0:2] == "wl":
@@ -38,4 +70,4 @@ data.append(architecture)
 data.append(ram)
 data.append(network_wlan)  # wireless
 data.append(network_eth)   # ethernet
-client.update(data)
+update(data)
