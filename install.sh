@@ -7,13 +7,9 @@ chmod 755 /usr/local/scripts/auto-pc-inventory
 touch /usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf
 echo "Enter the values then press enter or ctrl+c to cancel"
 echo "lets begin"
-echo "ip"
-read ip
-echo "user"
+read -r ip
 read -r "halp" user
-echo "secret"
 read secret
-echo "dbname"
 read dbname
 echo "$mysqlip
 $user
