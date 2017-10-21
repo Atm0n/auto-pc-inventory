@@ -2,7 +2,7 @@
 echo "welcome to the auto-pc-inventory script this will install the needed packages"
 echo "Enter the values then press enter or ctrl+c to cancel"
 echo "lets begin"
-read -pr "halp1" mysqlip
+read -p "halp1" mysqlip
 read -p user
 read -p secret
 read -p dbname
