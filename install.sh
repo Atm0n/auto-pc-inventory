@@ -8,14 +8,14 @@ touch /usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf
 echo "Enter the values then press ENTER or CTRL+C to cancel"
 
 echo "lets begin"
-echo -e "ip"
+echo "ip"
 read ip
 
-echo -e "user"
+echo "user"
 read -r "halp" user
-echo -e "secret"
+echo "secret"
 read secret
-echo -e "dbname"
+echo "dbname"
 read dbname
 echo "$mysqlip
 $user
