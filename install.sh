@@ -2,14 +2,14 @@
 echo "welcome to the auto-pc-inventory script this will install the needed packages"
 echo "Enter the values then press enter or ctrl+c to cancel"
 echo "lets begin"
-read -p "halp1" mysqlip
-read -p user
-read -p secret
-read -p dbname
-echo $mysqlip >/usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf
-echo $user <</usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf
-echo $mysqlsecret <</usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf
-echo $dbname <</usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf
+read mysqlip
+read user
+read secret
+read dbname
+echo $mysqlip > /usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf
+echo $user >> /usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf
+echo $mysqlsecret >> /usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf
+echo $dbname >> /usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf
 sudo su
 mkdir /usr/local/scripts
 mkdir /usr/local/scripts/auto-pc-inventory
