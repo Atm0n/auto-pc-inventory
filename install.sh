@@ -1,21 +1,23 @@
 #!/usr/bin/env bash
 echo "welcome to the auto-pc-inventory script this will install the needed packages"
-echo "Enter the values then press enter or ctrl+c to cancel"
-sleep 2
+echo "You need root permissions.Enter the values then press enter or ctrl+c to cancel"
 echo "lets begin"
-sleep 1
+echo "enter the mysql server ip"
 read mysqlip
+echo "enter the mysql user name"
 read user
+echo "enter the mysql secretpass"
 read secret
+echo "enter the dbname"
 read dbname
-sudo mkdir -p "/usr/local/scripts/auto-pc-inventory"
-cd "/usr/local/scripts/auto-pc-inventory"
-sudo touch auto-pc-inventory.conf
-echo $mysqlip > auto-pc-inventory.conf
-echo $user >> auto-pc-inventory.conf
-echo $mysqlsecret >> auto-pc-inventory.conf
-echo $dbname >> auto-pc-inventory.conf
-sudo wget https://raw.githubusercontent.com/Atm0n/auto-pc-inventory/master/index.py
+echo "Now enter the administrator password"
+sudo su
+mkdir /usr/local/scripts
+mkdir /usr/local/scripts/auto-pc-inventory
+chmod 755 /usr/local/scripts/auto-pc-inventory
+touch /usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf
+echo $mysqlip,$user,$secret,$dbname  > /usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf
+sudo wget https://raw.githubusercontent.com/Atm0n/auto-pc-inventory/master/index.py -P /usr/local/scripts/auto-pc-inventory/
 apt update && sudo apt install python3 python3-pip -y
 pip3 install --upgrade pip
 pip3 install psutil py-cpuinfo datetime pymysql
