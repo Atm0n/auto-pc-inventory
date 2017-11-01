@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 # imports from the root of the project folder
-import platform, psutil, cpuinfo, datetime, pymysql  # needed libraies
-
+import platform, psutil, cpuinfo, datetime, pymysql, csv  # needed libraies
+server_conf = open("auto-pc-inventory.conf", newline="").readlines()
+reader = csv.reader(server_conf)
+server_conf_data = []
+for row in reader:
+    ip = row[0]
+    user = row[1]
+    passwd = row[2]
+    database = row[3]
 def update(data):
-    
-
-    conn = pymysql.connect(host='192.168.56.101', user='user', passwd='passwd', db='db')
+    conn = pymysql.connect(host=ip, user=user, passwd=passwd, db=database)
     cur = conn.cursor()
     sql = "DELETE FROM `inventory` WHERE `mac_wlan` = %s"
     cur.execute(sql, (data[6]))
@@ -47,7 +52,6 @@ architecture = platform.processor()
 # it stores into a dic all the network data
 network = network_inf()
 net_keys = list(network.keys())
-
 for i in range(0, len(net_keys)):
     key = net_keys[i]
     if key[0:2] == "wl":
@@ -61,7 +65,6 @@ for i in range(0, len(net_keys)):
 # suposing that there are only 2 network interfaces, if not, you have to fix it XD
 ram = psutil.virtual_memory()  # all ram info
 ram = int(ram[0] / 1000000)
-
 data.append(date)
 data.append(linux_version)
 data.append(cpu)
