@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # imports from the root of the project folder
 import platform, psutil, cpuinfo, datetime, pymysql, csv  # needed libraies
-server_conf = open("auto-pc-inventory.conf", newline="").readlines()
+server_conf = open("/usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf", newline="").readlines()
 reader = csv.reader(server_conf)
 server_conf_data = []
 for row in reader:
@@ -52,6 +52,8 @@ architecture = platform.processor()
 # it stores into a dic all the network data
 network = network_inf()
 net_keys = list(network.keys())
+network_wlan = ""
+network_eth = ""
 for i in range(0, len(net_keys)):
     key = net_keys[i]
     if key[0:2] == "wl":
