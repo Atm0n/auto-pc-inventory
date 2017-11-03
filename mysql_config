@@ -12,9 +12,10 @@ CREATE TABLE `inventory` (
   `version` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `cpu` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `pc_name` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_name` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `arch` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `RAM` int(11) NOT NULL,
-  `mac_wlan` char(18) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `mac_wlan` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `mac_eth` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB;
 
