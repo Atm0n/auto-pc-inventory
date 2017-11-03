@@ -3,7 +3,9 @@
 import platform, psutil, cpuinfo, datetime, pymysql, csv  # needed libraies
 server_conf = open("/usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf", newline="").readlines()
 reader = csv.reader(server_conf)
-server_conf_data = []
+product_name = open("/usr/local/scripts/auto-pc-inventory/product_name.dat", "r")
+product_name = product_name.read()
+product_name = str(product_name[15:-1])
 for row in reader:
     ip = row[0]
     user = row[1]
@@ -18,8 +20,8 @@ def update(data):
     sql = "DELETE FROM `inventory` WHERE `mac_eth` = %s"
     cur.execute(sql, (data[7]))
     conn.commit()
-    sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,arch,RAM, mac_wlan, mac_eth) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"
-    cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]))
+    sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,product_name,arch,RAM, mac_wlan, mac_eth) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]))
     conn.commit()
     conn.close()
 def network_inf():
@@ -71,6 +73,7 @@ data.append(date)
 data.append(linux_version)
 data.append(cpu)
 data.append(pc_name)
+data.append(product_name)
 data.append(architecture)
 data.append(ram)
 data.append(network_wlan)  # wireless
