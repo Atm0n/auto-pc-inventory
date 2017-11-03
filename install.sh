@@ -19,9 +19,11 @@ chmod 755 "/usr/local/scripts/auto-pc-inventory"
 touch "/usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf"
 echo $mysqlip,$user,$secret,$dbname  > "/usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf"
 cd "/usr/local/scripts/auto-pc-inventory"
+touch product_name.dat
 touch start.sh
 echo "#!/bin/sh
 sleep 60
+dmidecode |grep -A3 '^System Information'|grep 'Product Name'> '/usr/local/scripts/auto-pc-inventory/product_name.dat'
 while ! ping -c1 $mysqlip >/dev/null
     do echo error > /dev/null
 done
