@@ -35,5 +35,7 @@ cd /path/to/the/downloaded/file
 ## SERVER-SIDE
 #### SERVER MUST HAVE A STATIC IP
 1-Create a mysql server, if you don't know how, here you have a [link](http://lmgtfy.com/?q=how+to+make+a+mysql+server)
+
 2-after having configurated the mysql server and beeing able to connect from the lan, we have to create the database and here you have a [link](https://github.com/Atm0n/auto-pc-inventory/edit/master/mysql_config)
+
 3-Finally you have it!
