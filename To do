@@ -7,13 +7,13 @@ infos:
 	-cpu				DONE
 		-arquitectura		DONE
 		-model			DONE
-	-pcname				DONE (not exactly what i wanted so the next one is what i really wanted)
+	-pcname				DONE
 	- brand and model of the pc
-	  if it's one(like DELL X600)   IMPOSSIBLE FOR NOW	(if i can't find a way to get this info, i would just leave it)
+	  if it's one(like DELL X600)   DONE
 	-network			DONE
 		-MAC			DONE
 		-IP			DONE
-data base or something:
-	-mysql server and database										DONE
-
-	- dhcp auto configurer?¿¿?										TO START
+structure:
+	- mysql server and database	DONE
+	- web interface?		TO START
+	- dhcp auto configurer?¿¿?	TO START
