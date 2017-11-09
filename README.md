@@ -1,5 +1,5 @@
 # Auto-pc-inventory
-A usefull utility to make the work of somebody htat have to make an inventory of a big number of computers, using a docker container of a mysql server (###STILL WORKS VERY BAD###using a google spreadsheet as data base at the branch:https://github.com/Atm0n/auto-pc-inventory/tree/automatic-computer-inventory(google-spreadshet).
+A usefull utility to make the work of somebody htat have to make an inventory of a big number of computers, using a docker container of a mysql server.
 I've tried to use an existing platform but that was too dificult and was not what i needed, so i decided to do it in my way.
 Nothing more to add. I will update this as soon i do a big change i geuss.
 #### the client has a delay of 60 seconds to execute the script( i did it to make sure you have network after sending the indormation), also if a ping can't be resolved, the script will not work
