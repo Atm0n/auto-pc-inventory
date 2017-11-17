@@ -1,4 +1,6 @@
 # Auto-pc-inventory
+
+wget https://raw.githubusercontent.com/Atm0n/auto-pc-inventory/master/client-install.sh
 A usefull utility to make the work of somebody htat have to make an inventory of a big number of computers, using a docker container of a mysql server.
 I've tried to use an existing platform but that was too dificult and was not what i needed, so i decided to do it in my way.
 Nothing more to add. I will update this as soon i do a big change i geuss.
