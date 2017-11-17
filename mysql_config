@@ -7,16 +7,17 @@ USE inventory;
 
 # here we crearte the table inventory into the database inventory with all the things we need
 CREATE TABLE `inventory` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `last_seen` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `version` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `cpu` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `pc_name` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `product_name` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `product_name` text CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `arch` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `RAM` int(11) NOT NULL,
   `mac_wlan` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `mac_eth` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL
+  `mac_eth` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `oem_key` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB;
 
 
@@ -24,7 +25,8 @@ CREATE TABLE `inventory` (
 ALTER TABLE `inventory`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `mac_wlan` (`mac_wlan`),
-  ADD UNIQUE KEY `mac_eth` (`mac_eth`);
+  ADD UNIQUE KEY `mac_eth` (`mac_eth`),
+  ADD UNIQUE KEY `oem_key` (`oem_key`);
   
   
 # and finally we modify the id camp to make it autoincremental
