@@ -38,3 +38,31 @@ ALTER TABLE `inventory`
 CREATE USER 'clients'@'%' IDENTIFIED BY 'password'; # change the password pls
 # user permissions
 GRANT SELECT, INSERT, UPDATE, DELETE ON inventory.inventory TO 'clients'@'%';
+# At the end, this has to look like this:
++--------------+----------+------+-----+-------------------+----------------+
+| Field        | Type     | Null | Key | Default           | Extra          |
++--------------+----------+------+-----+-------------------+----------------+
+| id           | int(11)  | NO   | PRI | NULL              | auto_increment |
+| last_seen    | datetime | NO   |     | CURRENT_TIMESTAMP |                |
+| version      | text     | NO   |     | NULL              |                |
+| cpu          | text     | NO   |     | NULL              |                |
+| pc_name      | text     | NO   |     | NULL              |                |
+| product_name | text     | YES  |     | NULL              |                |
+| arch         | text     | NO   |     | NULL              |                |
+| RAM          | int(11)  | NO   |     | NULL              |                |
+| mac_wlan     | char(18) | YES  | UNI | NULL              |                |
+| mac_eth      | char(18) | YES  | UNI | NULL              |                |
+| oem_key      | char(18) | YES  | UNI | NULL              |                |
++--------------+----------+------+-----+-------------------+----------------+
+# And if you did all this okay, then all the computers and his things will be listed like this
+
++----+---------------------+--------------+-------------------------------------------+-----------------+--------------+------+------+----------+-------------------+---------+
+| id | last_seen           | version      | cpu                                       | pc_name         | product_name | arch | RAM  | mac_wlan | mac_eth           | oem_key |
++----+---------------------+--------------+-------------------------------------------+-----------------+--------------+------+------+----------+-------------------+---------+
+|  1 | 2017-11-17 17:43:58 | Ubuntu 16.04 | Intel(R) Core(TM) i5-6300HQ CPU @ 2.30GHz | user-VirtualBox | VirtualBox   | i686 | 1047 |          | 08:00:27:86:20:14 |         |
++----+---------------------+--------------+-------------------------------------------+-----------------+--------------+------+------+----------+-------------------+---------+
+1 row in set (0.00 sec)
+
+
+
+
