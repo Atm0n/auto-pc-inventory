@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
 # imports from the root of the project folder
+from pathlib import Path
 import platform, psutil, cpuinfo, datetime, pymysql, csv  # needed libraies
 server_conf = open("/usr/local/scripts/auto-pc-inventory/auto-pc-inventory.conf", newline="").readlines()
 reader = csv.reader(server_conf)
 product_name = open("/usr/local/scripts/auto-pc-inventory/product_name.dat", "r")
 product_name = product_name.read()
 product_name = str(product_name[15:-1])
+oem_path = "/sys/firmware/acpi/tables/MSDM"
+oem_file = Path(oem_path)
+if oem_file.is_file():  # checking if file exist
+    oem_file = open(oem_path)
+    oem_file = oem_file.read()
+else:
+    oem_file = ""
 for row in reader:
     ip = row[0]
     user = row[1]
@@ -20,8 +28,8 @@ def update(data):
     sql = "DELETE FROM `inventory` WHERE `mac_eth` = %s"
     cur.execute(sql, (data[7]))
     conn.commit()
-    sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,product_name,arch,RAM, mac_wlan, mac_eth) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]))
+    sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,product_name,arch,RAM, mac_wlan, mac_eth, oem_key) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]))
     conn.commit()
     conn.close()
 def network_inf():
@@ -78,4 +86,5 @@ data.append(architecture)
 data.append(ram)
 data.append(network_wlan)  # wireless
 data.append(network_eth)   # ethernet
+data.append(oem_file)
 update(data)
