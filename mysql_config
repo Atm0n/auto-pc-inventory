@@ -11,29 +11,22 @@ CREATE TABLE `inventory` (
   `last_seen` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `version` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `cpu` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `pc_name` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `product_name` text CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `arch` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `RAM` int(11) NOT NULL,
-  `mac_wlan` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `mac_eth` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `oem_key` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL
+  `mac_wlan` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL UNIQUE,
+  `mac_eth` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL UNIQUE,
+  `oem_key` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL UNIQUE
+) ENGINE=InnoDB;
+
+CREATE TABLE `pcname` (
+  `id` int(11) KEY NOT NULL AUTO_INCREMENT,
+  `pc_name` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `mac_wlan` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL UNIQUE,
+  `mac_eth` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL UNIQUE
 ) ENGINE=InnoDB;
 
 
-# here we modify the table and we add the unique key to mac_wlan and mac_eth
-ALTER TABLE `inventory`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `mac_wlan` (`mac_wlan`),
-  ADD UNIQUE KEY `mac_eth` (`mac_eth`),
-  ADD UNIQUE KEY `oem_key` (`oem_key`);
-  
-  
-# and finally we modify the id camp to make it autoincremental
-ALTER TABLE `inventory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-  
-  
 # client user
 CREATE USER 'clients'@'%' IDENTIFIED BY 'password'; # change the password pls
 # user permissions
