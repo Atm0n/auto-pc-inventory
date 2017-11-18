@@ -29,7 +29,6 @@ def update(data):
     cur.execute(sql, (data[8]))
     conn.commit()
     if oem_file == "":
-        
         if data[7] == "null":
             sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,product_name,arch,RAM, mac_eth) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"
             cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[8]))
@@ -37,10 +36,9 @@ def update(data):
             sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,product_name,arch,RAM, mac_wlan) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"
             cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]))
         else:
-            sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,product_name,arch,RAM,mac_wlan) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,product_name,arch,RAM,mac_wlan, mac_eth) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
             cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]))
     else:
-        
         if data[7] == "null":
             sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,product_name,arch,RAM, mac_eth, oem_key) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
             cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[8], data[9]))
@@ -106,6 +104,5 @@ data.append(architecture)
 data.append(ram)
 data.append(network_wlan)  # wireless
 data.append(network_eth)   # ethernet
-data.append(oem_file)
-print(oem_file)
+data.append(oem_file)	# oem key
 update(data)
