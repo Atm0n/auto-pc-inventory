@@ -3,8 +3,6 @@
 CREATE DATABASE inventory;
 # then we tell mysql that we are working into the database inventory
 USE inventory;
-
-
 # here we crearte the table inventory into the database inventory with all the things we need
 CREATE TABLE `inventory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -19,19 +17,11 @@ CREATE TABLE `inventory` (
   `oem_key` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL UNIQUE
 ) ENGINE=InnoDB;
 
-CREATE TABLE `pcname` (
-  `id` int(11) KEY NOT NULL AUTO_INCREMENT,
-  `pc_name` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `mac_wlan` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL UNIQUE,
-  `mac_eth` char(18) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL UNIQUE
-) ENGINE=InnoDB;
-
-
 # client user
 CREATE USER 'clients'@'%' IDENTIFIED BY 'password'; # change the password pls
 # user permissions
 GRANT SELECT, INSERT, UPDATE, DELETE ON inventory.inventory TO 'clients'@'%';
-# At the end, this has to look like this:
+# At the end, this has to look like this(you can check doing DESCRIBE database;):
 +--------------+----------+------+-----+-------------------+----------------+
 | Field        | Type     | Null | Key | Default           | Extra          |
 +--------------+----------+------+-----+-------------------+----------------+
@@ -47,12 +37,12 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON inventory.inventory TO 'clients'@'%';
 | mac_eth      | char(18) | YES  | UNI | NULL              |                |
 | oem_key      | char(18) | YES  | UNI | NULL              |                |
 +--------------+----------+------+-----+-------------------+----------------+
-# And if you did all this okay, then all the computers and his things will be listed like this
+# And if you did all this okay, then all the computers and his things will be listed like this (check with SELECT * FROM database;
 
 +----+---------------------+--------------+-------------------------------------------+-----------------+--------------+------+------+----------+-------------------+---------+
 | id | last_seen           | version      | cpu                                       | pc_name         | product_name | arch | RAM  | mac_wlan | mac_eth           | oem_key |
 +----+---------------------+--------------+-------------------------------------------+-----------------+--------------+------+------+----------+-------------------+---------+
-|  1 | 2017-11-17 17:43:58 | Ubuntu 16.04 | Intel(R) Core(TM) i5-6300HQ CPU @ 2.30GHz | user-VirtualBox | VirtualBox   | i686 | 1047 |          | 08:00:27:86:20:14 |         |
+|  1 | 2017-11-17 17:43:58 | Ubuntu 16.04 | Intel(R) Core(TM) i5-6300HQ CPU @ 2.30GHz | user-VirtualBox | VirtualBox   | i686 | 1047 |    NULL   | 08:00:27:86:20:14 |    NULL  |
 +----+---------------------+--------------+-------------------------------------------+-----------------+--------------+------+------+----------+-------------------+---------+
 1 row in set (0.00 sec)
 
