@@ -21,15 +21,35 @@ for row in reader:
     database = row[3]
 def update(data):
     conn = pymysql.connect(host=ip, user=user, passwd=passwd, db=database)
-    cur = conn.cursor()
+    cur =conn.cursor()
     sql = "DELETE FROM `inventory` WHERE `mac_wlan` = %s"
-    cur.execute(sql, (data[6]))
-    conn.commit()
-    sql = "DELETE FROM `inventory` WHERE `mac_eth` = %s"
     cur.execute(sql, (data[7]))
     conn.commit()
-    sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,product_name,arch,RAM, mac_wlan, mac_eth, oem_key) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]))
+    sql = "DELETE FROM `inventory` WHERE `mac_eth` = %s"
+    cur.execute(sql, (data[8]))
+    conn.commit()
+    if oem_file == "":
+        
+        if data[7] == "null":
+            sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,product_name,arch,RAM, mac_eth) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"
+            cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[8]))
+        elif data[8] == "null":
+            sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,product_name,arch,RAM, mac_wlan) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"
+            cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]))
+        else:
+            sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,product_name,arch,RAM,mac_wlan) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]))
+    else:
+        
+        if data[7] == "null":
+            sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,product_name,arch,RAM, mac_eth, oem_key) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[8], data[9]))
+        elif data[8] == "null":
+            sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,product_name,arch,RAM, mac_wlan, oem_key) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[9]))
+        else:
+            sql = "INSERT INTO inventory(last_seen,version,cpu,pc_name,product_name,arch,RAM,mac_wlan,mac_eth, oem_key) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            cur.execute(sql, (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]))
     conn.commit()
     conn.close()
 def network_inf():
@@ -62,8 +82,8 @@ architecture = platform.processor()
 # it stores into a dic all the network data
 network = network_inf()
 net_keys = list(network.keys())
-network_wlan = ""
-network_eth = ""
+network_wlan = 'null'
+network_eth = 'null'
 for i in range(0, len(net_keys)):
     key = net_keys[i]
     if key[0:2] == "wl":
@@ -87,4 +107,5 @@ data.append(ram)
 data.append(network_wlan)  # wireless
 data.append(network_eth)   # ethernet
 data.append(oem_file)
+print(oem_file)
 update(data)
