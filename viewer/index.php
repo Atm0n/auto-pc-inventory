@@ -4,25 +4,28 @@
     <body>
         <table style="width:100%">
   <tr>
-    <th>Firstname</th>
-    <th>Lastname</th> 
-    <th>Age</th>
+    <th>id</th>
+    <th>last_seen</th> 
+    <th>version</th>
+      <th>cpu</th>
+      <th>pc_name</th>
+      <th>product_name</th>
+      <th>arch</th>
+      <th>RAM</th>
+      <th>mac_wlan</th>
+      <th>mac_eth</th>
+      <th>oem_key</th>
   </tr>
         <?php
 require_once('config.php');
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
 $sql = "SELECT * FROM inventory";
 $result = $db->query($sql);
-
 if (!$result) {
     die('Invalid query: ' . mysqli_error());
 }
-
 $row_cnt = $result->num_rows;
-
 if ($row_cnt > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
