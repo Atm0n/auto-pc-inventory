@@ -62,9 +62,13 @@ def on_tree_select(event):
     curItem = tree.focus()
     values = tree.item(curItem)
     values = values["values"]
-    print(values)
-    values = values[7]+ " ; " + values[8]
-    print(tree.item(curItem))
+    if values[7] =="None":
+        values = values[8]
+    elif values[8] == "None":
+        values = values[7]
+    else:
+        values = values[7]+ " ; " + values[8]
+    root.clipboard_clear()
     root.clipboard_append(values)
 
 tree.bind('<ButtonRelease-1>', on_tree_select)
