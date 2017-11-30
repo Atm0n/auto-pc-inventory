@@ -2,18 +2,15 @@ from tkinter import *
 import tkinter.ttk as ttk
 import pymysql
 root = Tk()
-
 tree = ttk.Treeview(root)
 conn = pymysql.connect("192.168.56.101", "clients", "inventory", "inventory")
 e1 = Entry(root, width=10)
 e1.grid(padx=10,pady=10)
 ysb = ttk.Scrollbar(orient='vertical', command=tree.yview)
-
 xsb = ttk.Scrollbar(orient='horizontal', command=tree.xview)
 cur = conn.cursor(pymysql.cursors.DictCursor)
 tree.place(x=822, y=240)
 root.wm_title("inventory viewer")
-
 tree["columns"] = ("id","last_seen","version","cpu","pc_name","product_name","arch","RAM", "mac_wlan", "mac_eth", "oem_key")
 tree.heading("#0", text='ID')
 tree.column("#0",minwidth=0,width=50)
@@ -39,25 +36,11 @@ tree.heading("#10", text="oem_key")
 tree.column("#10",minwidth=0,width=50)
 tree.configure(yscroll=ysb.set, xscroll=xsb.set)
 tree.grid()
-
 root.grid()
 sql = "SELECT * FROM `inventory`"
 cur.execute(sql)
 conn.commit()
-
 cmd1=""
-
-
-def update_tree():
-    cmd1 = mEntry.get()
-    sql = "SELECT * FROM `inventory` where mac_wlan =%s"
-    cur.execute(sql,cmd1)
-    conn.commit()
-    if cmd1 == "":
-        cmd1= "*"
-        cur.execute(sql,cmd1)
-        conn.commit()
-
 def on_tree_select(event):
     curItem = tree.focus()
     values = tree.item(curItem)
@@ -70,9 +53,7 @@ def on_tree_select(event):
         values = values[7]+ " ; " + values[8]
     root.clipboard_clear()
     root.clipboard_append(values)
-
 tree.bind('<ButtonRelease-1>', on_tree_select)
 for row in cur:
        tree.insert("", "end",text=row["id"],values=(row["last_seen"],row["version"],row["cpu"],row["pc_name"],row["product_name"],row["arch"],row["RAM"], row["mac_wlan"], row["mac_eth"], row["oem_key"]))
-
 root.mainloop()
