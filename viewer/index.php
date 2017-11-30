@@ -8,7 +8,7 @@ require_once('config.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$sql = "SELECT * FROM inventory ORDER BY `name` DESC";
+$sql = "SELECT * FROM inventory";
 $result = $db->query($sql);
 
 if (!$result) {
