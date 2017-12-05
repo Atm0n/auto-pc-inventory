@@ -1,8 +1,18 @@
+
+
 <html>
     <head><title>Visor Inventari</title>
-    <link rel="stylesheet" type="text/css" href="style.css"></head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+<script language="javascript" type="text/javascript" src="actb.js"></script><!-- External script -->
+<script language="javascript" type="text/javascript" src="tablefilter.js"></script>
+</head>
     <body>
-        <table style="width:100%">
+<?php $password = "admin";?>
+<?php 
+// If password is valid let the user get access
+if (isset($_POST["password"]) && ($_POST["password"]=="$password")) {
+?>
+<table id="table1" class="mytable" >
   <tr>
     <th>id</th>
     <th>last_seen</th> 
@@ -16,6 +26,7 @@
       <th>mac_eth</th>
       <th>oem_key</th>
   </tr>
+
         <?php
 require_once('config.php');
 error_reporting(E_ALL);
@@ -35,6 +46,25 @@ if ($row_cnt > 0) {
     echo 'No hi ha entrades';
 }
 ?></table>
+
+
+<script language="javascript" type="text/javascript">
+//<![CDATA[
+	setFilterGrid( "table1" );
+//]]>
+</script>
+<?php 
+}
+else
+{
+// Wrong password or no password entered display this message
+if (isset($_POST['password']) || $password == "") {
+  }
+  print "<form method=\"post\"><p align=\"center\">Please enter your password for access<br>";
+  print "<input name=\"password\" type=\"password\" size=\"25\" maxlength=\"10\"><input value=\"Login\" type=\"submit\"></p></form>";
+}
+  
+?>
     </body>
 
 
