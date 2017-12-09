@@ -10,7 +10,7 @@ $config['mysql']['name'] = 'inventory';
 $db = mysqli_connect($config['mysql']['host'], $config['mysql']['user'], $config['mysql']['pass'], $config['mysql']['name']);
 
 if (!$db) {
-    die('La connecció ha fallat ' . mysqli_connect_error());
+    die('No connection ' . mysqli_connect_error());
 } 
 
 
